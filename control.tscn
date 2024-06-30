@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck0jd2fnpchpm"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_16c7e"]
+[ext_resource type="PackedScene" uid="uid://csk527nrf7sog" path="res://Player.tscn" id="2_o6u67"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = -4.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_16c7e")
+player_scene = ExtResource("2_o6u67")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player.tscn")
+spawn_path = NodePath("..")
+
+[node name="EnterTo" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.003
+anchor_bottom = 1.009
+offset_right = -0.453003
+offset_bottom = 0.194946
+
+[node name="HostButton" type="Button" parent="EnterTo"]
+layout_mode = 0
+offset_top = 153.0
+offset_right = 44.0
+offset_bottom = 184.0
+text = "Host
+"
+
+[node name="JoinButton" type="Button" parent="EnterTo"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 188.0
+offset_right = 45.0
+offset_bottom = 219.0
+text = "Join
+"
+
+[connection signal="pressed" from="EnterTo/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="EnterTo/JoinButton" to="." method="_on_join_button_pressed"]

@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://csk527nrf7sog"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_l23tp"]
+[ext_resource type="Texture2D" uid="uid://bftxbvcss0wyk" path="res://Soldier.png" id="2_1gbwx"]
+[ext_resource type="Texture2D" uid="uid://c5gofq5v4cs2j" path="res://rogues.png" id="2_g800u"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t2cw4"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e63qm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8rcm"]
+atlas = ExtResource("2_g800u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_72lu8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8rcm")
+}],
+"loop": true,
+"name": &"DWAFF",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(59, 36)
+script = ExtResource("1_l23tp")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_t2cw4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 4)
+shape = SubResource("RectangleShape2D_e63qm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_72lu8")
+animation = &"DWAFF"
+
+[node name="CharacterIMG" type="Sprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_1gbwx")

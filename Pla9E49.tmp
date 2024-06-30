@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://csk527nrf7sog"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_isjkm"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t2cw4"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_31muo"]
+
+[node name="Node2D" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 36, 0)
+script = ExtResource("1_isjkm")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_t2cw4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_31muo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
